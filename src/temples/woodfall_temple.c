@@ -6,15 +6,25 @@
 RECOMP_IMPORT("ProxyMM_ActorListIndex", s32 GetActorListIndex(Actor* actor));
 
 RECOMP_CALLBACK("*", recomp_after_actor_init)
-void Termina_Field_AfterActorInit(PlayState* play, Actor* actor) {
+void Woodfall_Temple_AfterActorInit(PlayState* play, Actor* actor) {
     s32 actorListIndex = GetActorListIndex(actor);
 
-    if (play->sceneId != SCENE_00KEIKOKU)
+    /*
+        0 = All
+        1 = Overworld
+        2 = Temples
+    */
+
+    if (play->sceneId != SCENE_MITURIN || recomp_get_config_u32("enemy_removal") == 1)
         return;
 
     s32 id = actor->id;
 
-    if (id == 0x003E || id == 0x014A || id == 0x0033 || id == 0x015B || id == 0x0291 || id == 0x0216 || id == 0x000B || id == 0x00F1 || id == 0x016F || id == 0x0266) {
+    /*
+        0x0216 = Leever
+    */
+
+    if (id == 0x0216) {
         Actor_Kill(actor);
     }
 }

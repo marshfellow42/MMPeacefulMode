@@ -63,9 +63,9 @@ data_reference_syms_files = [ "Zelda64RecompSyms/mm.us.rev1.datasyms.toml", "Zel
 additional_files = [ "thumb.png" ]
 
 [[manifest.config_options]]
-id = "limit_area"
-name = "Limit Area"
-description = "Select which parts of the world to remove the mobs"
+id = "enemy_removal"
+name = "Enemy Removal"
+description = "Select which parts of the world to remove the enemies"
 type = "Enum"
 options = [ "All", "Overworld", "Temples" ]
 default = "All"
