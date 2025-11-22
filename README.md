@@ -1,11 +1,14 @@
-# Majora's Mask: Recompiled Mod Template
+# Peaceful Mode
 
-This is an example mod for Majora's Mask: Recompiled that can be used as a template for creating mods. It has a basic build system, headers, sample code, and a mod config toml.
+This is a mod which removes the enemies from the world of Termina in Majora's Mask, making it similar to the Peaceful Mode in Minecraft
 
-Example code for using the recompui API to build ingame UI can be found in the `ui-example` branch.
+## Development
 
-### Writing mods
-See [this document](https://hackmd.io/fMDiGEJ9TBSjomuZZOgzNg) for an explanation of the modding framework, including how to write function patches and perform interop between different mods.
+### Cloning
+To develop on this mod, you need to clone with submodules
+```bash
+git clone --recurse-submodules https://github.com/marshfellow42/MMPeacefulMode.git
+```
 
 ### Tools
 You'll need to install `clang` and `make` to build this template.

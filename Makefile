@@ -1,4 +1,11 @@
 BUILD_DIR := build
+MOD_TOML := ./mod.toml
+
+ifeq ($(OS),Windows_NT)
+    PYTHON_EXEC ?= python
+else
+    PYTHON_EXEC ?= python3
+endif
 
 # Allow the user to specify the compiler and linker on macOS
 # as Apple Clang does not support MIPS architecture
@@ -14,6 +21,18 @@ else
 endif
 
 TARGET  := $(BUILD_DIR)/mod.elf
+
+ifeq ($(OS),Windows_NT)
+    RECOMP_MOD_TOOL := ./RecompModTool.exe
+else
+    RECOMP_MOD_TOOL := ./RecompModTool
+endif
+
+ifeq ($(OS),Windows_NT)
+	MODDIR := $(subst \,/,$(USERPROFILE))/AppData/Local/Zelda64Recompiled/mods
+else
+    MODDIR := $(HOME)/.config/Zelda64Recompiled/mods
+endif
 
 LDSCRIPT := mod.ld
 ARCHFLAGS := -target mips -mips2 -mabi=32 -O2 -G0 -mno-abicalls -mno-odd-spreg -mno-check-zero-division \
@@ -43,7 +62,7 @@ $(TARGET): $(ALL_OBJS) $(LDSCRIPT) | $(BUILD_DIR)
 
 $(BUILD_DIR) $(BUILD_DIRS):
 ifeq ($(OS),Windows_NT)
-	if not exist "$(subst /,\,$@)" mkdir "$(subst /,\,$@)"
+	cmd /C mkdir $(subst /,\,$@)
 else
 	mkdir -p $@
 endif
@@ -51,11 +70,17 @@ endif
 $(C_OBJS): $(BUILD_DIR)/%.o : %.c | $(BUILD_DIRS)
 	$(CC) $(CFLAGS) $(CPPFLAGS) $< -MMD -MF $(@:.o=.d) -c -o $@
 
+no-post-build: $(TARGET)
+	$(RECOMP_MOD_TOOL) ./mod.toml $(BUILD_DIR)
+
+post-build: $(TARGET)
+	$(RECOMP_MOD_TOOL) ./mod.toml $(BUILD_DIR) && mkdir -p "$(MODDIR)" && cp $(BUILD_DIR)/*.nrm "$(MODDIR)"
+
 clean:
 ifeq ($(OS),Windows_NT)
-	if exist $(BUILD_DIR) rmdir /S /Q $(BUILD_DIR)
+	cmd /C rmdir /S /Q $(subst /,\,$(BUILD_DIR))
 else
-	rm -rf $(BUILD_DIR)
+    rm -rf $(BUILD_DIR)
 endif
 
 -include $(ALL_DEPS)
