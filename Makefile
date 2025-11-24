@@ -29,9 +29,9 @@ else
 endif
 
 ifeq ($(OS),Windows_NT)
-	MODDIR := $(subst \,/,$(USERPROFILE))/AppData/Local/Zelda64Recompiled/mods
+	MOD_DIR := $(subst \,/,$(USERPROFILE))/AppData/Local/Zelda64Recompiled/mods
 else
-    MODDIR := $(HOME)/.config/Zelda64Recompiled/mods
+    MOD_DIR := $(HOME)/.config/Zelda64Recompiled/mods
 endif
 
 LDSCRIPT := mod.ld
@@ -71,10 +71,10 @@ $(C_OBJS): $(BUILD_DIR)/%.o : %.c | $(BUILD_DIRS)
 	$(CC) $(CFLAGS) $(CPPFLAGS) $< -MMD -MF $(@:.o=.d) -c -o $@
 
 no-post-build: $(TARGET)
-	$(RECOMP_MOD_TOOL) ./mod.toml $(BUILD_DIR)
+	$(RECOMP_MOD_TOOL) $(MOD_TOML) $(BUILD_DIR)
 
 post-build: $(TARGET)
-	$(RECOMP_MOD_TOOL) ./mod.toml $(BUILD_DIR) && mkdir -p "$(MODDIR)" && cp $(BUILD_DIR)/*.nrm "$(MODDIR)"
+	$(RECOMP_MOD_TOOL) $(MOD_TOML) $(BUILD_DIR) && mkdir -p "$(MOD_DIR)" && cp $(BUILD_DIR)/*.nrm "$(MOD_DIR)"
 
 clean:
 ifeq ($(OS),Windows_NT)

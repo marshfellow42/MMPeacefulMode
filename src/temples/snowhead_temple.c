@@ -21,10 +21,10 @@ void Snowhead_Temple_AfterActorInit(PlayState* play, Actor* actor) {
     s32 id = actor->id;
 
     /*
-        0x0216 = Leever
+        ACTOR_EN_WF = White Wolfos
     */
 
-    if (id == 0x0216) {
+    if (id == ACTOR_EN_WF) {
         Actor_Kill(actor);
     }
 }

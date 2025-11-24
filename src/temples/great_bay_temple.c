@@ -21,10 +21,10 @@ void Great_Bay_Temple_AfterActorInit(PlayState* play, Actor* actor) {
     s32 id = actor->id;
 
     /*
-        0x0216 = Leever
+        ACTOR_BOSS_05 = Bio Deku Baba
     */
 
-    if (id == 0x0216) {
+    if (id == ACTOR_BOSS_05) {
         Actor_Kill(actor);
     }
 }

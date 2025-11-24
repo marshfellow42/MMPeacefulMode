@@ -28,6 +28,19 @@ To build the mod and directly send the `.nrm` file to the Zelda 64 Recompilation
 make post-build
 ```
 
+### Debug Console
+To access the Zelda 64 Recompilation console, just run:
+
+- On Windows
+```bash
+.\Zelda64Recompiled.exe --show-console
+```
+
+- On Linux and MacOS
+```bash
+./Zelda64Recompiled --show-console
+```
+
 ### Updating the Majora's Mask Decompilation Submodule
 Mods can also be made with newer versions of the Majora's Mask decompilation instead of the commit targeted by this repo's submodule.
 To update the commit of the decompilation that you're targeting, follow these steps:

@@ -3,12 +3,10 @@
 #include "recomputils.h"
 #include "recompconfig.h"
 
-//#define CUR_ROOM(play) ((play)->roomCtx.curRoom.num)
-
 RECOMP_IMPORT("ProxyMM_ActorListIndex", s32 GetActorListIndex(Actor* actor));
 
 RECOMP_CALLBACK("*", recomp_after_actor_init)
-void Hidden_Grottos_AfterActorInit(PlayState* play, Actor* actor) {
+void Southern_Swamp_AfterActorInit(PlayState* play, Actor* actor) {
     s32 actorListIndex = GetActorListIndex(actor);
 
     /*
@@ -17,19 +15,19 @@ void Hidden_Grottos_AfterActorInit(PlayState* play, Actor* actor) {
         2 = Temples
     */
 
-    if (play->sceneId != SCENE_KAKUSIANA || recomp_get_config_u32("enemy_removal") == 2)
+    if (play->sceneId != SCENE_20SICHITAI || recomp_get_config_u32("enemy_removal") == 2)
         return;
 
     s32 id = actor->id;
 
     /*
-        ACTOR_EN_PEEHAT = Peahat
+        ACTOR_EN_BIGOKUTA = Big Octorock
         ACTOR_EN_DEKUBABA = Deku Baba
-        ACTOR_EN_DODONGO = Dodongo
         ACTOR_EN_KAREBABA = Wilted Deku Baba
+        ACTOR_EN_GRASSHOPPER = Dragonfly
     */
 
-    if (id == ACTOR_EN_PEEHAT || id == ACTOR_EN_DEKUBABA || id == ACTOR_EN_DODONGO || id == ACTOR_EN_KAREBABA) {
+    if (id == ACTOR_EN_BIGOKUTA || id == ACTOR_EN_DEKUBABA || id == ACTOR_EN_KAREBABA || id == ACTOR_EN_GRASSHOPPER) {
         Actor_Kill(actor);
     }
 }

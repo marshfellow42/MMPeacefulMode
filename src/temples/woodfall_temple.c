@@ -21,10 +21,10 @@ void Woodfall_Temple_AfterActorInit(PlayState* play, Actor* actor) {
     s32 id = actor->id;
 
     /*
-        0x0216 = Leever
+        ACTOR_EN_GRASSHOPPER = Dragonfly
     */
 
-    if (id == 0x0216) {
+    if (id == ACTOR_EN_GRASSHOPPER) {
         Actor_Kill(actor);
     }
 }

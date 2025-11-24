@@ -6,7 +6,7 @@
 RECOMP_IMPORT("ProxyMM_ActorListIndex", s32 GetActorListIndex(Actor* actor));
 
 RECOMP_CALLBACK("*", recomp_after_actor_init)
-void Woods_Of_Mistery_AfterActorInit(PlayState* play, Actor* actor) {
+void Beneath_The_Well_AfterActorInit(PlayState* play, Actor* actor) {
     s32 actorListIndex = GetActorListIndex(actor);
 
     /*
@@ -15,16 +15,18 @@ void Woods_Of_Mistery_AfterActorInit(PlayState* play, Actor* actor) {
         2 = Temples
     */
 
-    if (play->sceneId != SCENE_26SARUNOMORI || recomp_get_config_u32("enemy_removal") == 2)
+    if (play->sceneId != SCENE_REDEAD || recomp_get_config_u32("enemy_removal") == 2)
         return;
 
     s32 id = actor->id;
 
     /*
-        0x01BA = Snapper
+        ACTOR_EN_TALK_GIBUD = Gibdo Requesting an Item
     */
 
-    if (id == 0x01BA) {
+    // Killing the Request Gibdo doesn't set the flag of opening the door
+
+    if (id == ACTOR_EN_TALK_GIBUD) {
         Actor_Kill(actor);
     }
 }

@@ -15,7 +15,7 @@ display_name = "Peaceful Mode"
 
 # The description that will show up when this mod is displayed in the mod menu. This should be human readable.
 description =  """
-This is a mod which removes the enemies from the world of Termina in Majora's Mask, making it similar to the Peaceful Mode in Minecraft"""
+This is a mod which removes the enemies from the world of Termina in Majora's Mask, making it similar to the Peaceful Mode in Minecraft."""
 
 # A short description that will show up in this mod's entry in the mod list. This should be human readable and kept short
 # to prevent it from being cut off due to the limited space.
@@ -65,7 +65,23 @@ additional_files = [ "thumb.png" ]
 [[manifest.config_options]]
 id = "enemy_removal"
 name = "Enemy Removal"
-description = "Select which parts of the world to remove the enemies"
+description = "Select which parts of the world to remove the enemies."
 type = "Enum"
 options = [ "All", "Overworld", "Temples" ]
 default = "All"
+
+[[manifest.config_options]]
+id = "unlock_romani"
+name = "Unlock Romani Ranch early"
+description = "Destroy the boulder blocking Romani Ranch early."
+type = "Enum"
+options = [ "On", "Off" ]
+default = "Off"
+
+[[manifest.config_options]]
+id = "debug_console"
+name = "Debug Console"
+description = "Enable Debug Console (may cause slow downs)."
+type = "Enum"
+options = [ "On", "Off" ]
+default = "Off"

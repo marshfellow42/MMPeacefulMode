@@ -6,7 +6,7 @@
 RECOMP_IMPORT("ProxyMM_ActorListIndex", s32 GetActorListIndex(Actor* actor));
 
 RECOMP_CALLBACK("*", recomp_after_actor_init)
-void Road_To_Southern_Swamp_AfterActorInit(PlayState* play, Actor* actor) {
+void Great_Bay_Coast_AfterActorInit(PlayState* play, Actor* actor) {
     s32 actorListIndex = GetActorListIndex(actor);
 
     /*
@@ -15,19 +15,17 @@ void Road_To_Southern_Swamp_AfterActorInit(PlayState* play, Actor* actor) {
         2 = Temples
     */
 
-    if (play->sceneId != SCENE_24KEMONOMITI || recomp_get_config_u32("enemy_removal") == 2)
+    if (play->sceneId != SCENE_30GYOSON || recomp_get_config_u32("enemy_removal") == 2)
         return;
 
     s32 id = actor->id;
 
     /*
-        0x014A = Chuchu
-        0x015B = Bad Bat
-        0x0033 = Deku Baba
-        0x00EC = Wolfos
+        ACTOR_EN_NEO_REEBA = Leever
+        ACTOR_EN_RR = Like Like
     */
 
-    if (id == 0x014A || id == 0x015B || id == 0x0033 || id == 0x00EC) {
+    if (id == ACTOR_EN_NEO_REEBA || id == ACTOR_EN_RR) {
         Actor_Kill(actor);
     }
 }

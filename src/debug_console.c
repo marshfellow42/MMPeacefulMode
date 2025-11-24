@@ -51,8 +51,12 @@ static const char* GetActorName(int actorId) {
 
 RECOMP_CALLBACK("*", recomp_after_actor_init)
 void Debug_AfterActorInit(PlayState* play, Actor* actor) {
+
+    if (recomp_get_config_u32("debug_console") == 1)
+        return;
+
     s32 listIndex = GetActorListIndex(actor);
-    s32 actor_id = actor->id;
+    s32 actor_id  = actor->id;
     s32 room      = play->roomCtx.curRoom.num;
     s32 scene     = play->sceneId;
 
@@ -62,7 +66,13 @@ void Debug_AfterActorInit(PlayState* play, Actor* actor) {
     recomp_printf("Enemy Removal Enum: %d\n", recomp_get_config_u32("enemy_removal"));
 
     recomp_printf(
-        "[ActorInit] ListIndex=%d | ID=0x%04X (%s) | Scene=%d (%s) | Room=%d\n",
-        listIndex, actor_id, actorName + 6, scene, sceneName, room
+        "[ActorInit] ListIndex=%d | ID=0x%04X (%s) | Scene=%d (%s) | Room=%d\n"
+        "  Position  = (X=%.2f, Y=%.2f, Z=%.2f)\n"
+        "  Rotation  = (X=0x%04X, Y=0x%04X, Z=0x%04X)\n"
+        "  Params = 0x%04X\n",
+        listIndex, actor_id, actorName, scene, sceneName, room,
+        actor->world.pos.x, actor->world.pos.y, actor->world.pos.z,
+        actor->world.rot.x, actor->world.rot.y, actor->world.rot.z,
+        actor->params
     );
 }

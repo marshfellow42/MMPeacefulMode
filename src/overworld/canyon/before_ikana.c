@@ -21,11 +21,11 @@ void Before_Ikana_AfterActorInit(PlayState* play, Actor* actor) {
     s32 id = actor->id;
 
     /*
-        0x016F = Real Bombchu
-        0x003E = Blue Bubbles
+        ACTOR_EN_RAT = Real Bombchu
+        ACTOR_EN_BB = Blue Bubbles
     */
 
-    if (id == 0x016F || id == 0x003E) {
+    if (id == ACTOR_EN_RAT || id == ACTOR_EN_BB) {
         Actor_Kill(actor);
     }
 }

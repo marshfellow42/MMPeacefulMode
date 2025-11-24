@@ -21,19 +21,19 @@ void Termina_Field_AfterActorInit(PlayState* play, Actor* actor) {
     s32 id = actor->id;
 
     /*
-        0x003E = Blue Bubbles
-        0x014A = Chuchu
-        0x0033 = Deku Baba
-        0x015B = Bad Bat
-        0x0291 = Takkuri
-        0x0216 = Leever
-        0x000B = Dodongo
-        0x00F1 = Guay
-        0x016F = Real Bombchu
-        0x0266 = Guay Circling Clock Town
+        ACTOR_EN_BB = Blue Bubbles
+        ACTOR_EN_SLIME = Chuchu
+        ACTOR_EN_DEKUBABA = Deku Baba
+        ACTOR_EN_BAT = Bad Bat
+        ACTOR_EN_THIEFBIRD = Takkuri
+        ACTOR_EN_NEO_REEBA = Leever
+        ACTOR_EN_DODONGO = Dodongo
+        ACTOR_EN_CROW = Guay
+        ACTOR_EN_RAT = Real Bombchu
+        ACTOR_EN_RUPPECROW = Guay Circling Clock Town
     */
 
-    if (id == 0x003E || id == 0x014A || id == 0x0033 || id == 0x015B || id == 0x0291 || id == 0x0216 || id == 0x000B || id == 0x00F1 || id == 0x016F || id == 0x0266) {
+    if (id == ACTOR_EN_BB || id == ACTOR_EN_SLIME || id == ACTOR_EN_DEKUBABA || id == ACTOR_EN_BAT || id == ACTOR_EN_THIEFBIRD || id == ACTOR_EN_NEO_REEBA || id == ACTOR_EN_DODONGO || id == ACTOR_EN_CROW || id == ACTOR_EN_RAT || id == ACTOR_EN_RUPPECROW) {
         Actor_Kill(actor);
     }
 }
