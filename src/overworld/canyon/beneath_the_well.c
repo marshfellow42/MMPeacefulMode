@@ -9,6 +9,9 @@ RECOMP_CALLBACK("*", recomp_after_actor_init)
 void Beneath_The_Well_AfterActorInit(PlayState* play, Actor* actor) {
     s32 actorListIndex = GetActorListIndex(actor);
 
+    if(gSaveContext.gameMode != GAMEMODE_NORMAL)
+        return;
+
     /*
         0 = All
         1 = Overworld
@@ -22,11 +25,11 @@ void Beneath_The_Well_AfterActorInit(PlayState* play, Actor* actor) {
 
     /*
         ACTOR_EN_TALK_GIBUD = Gibdo Requesting an Item
+        ACTOR_EN_FIREFLY = Keese (Normal, Ice or Fire)
     */
 
-    // Killing the Request Gibdo doesn't set the flag of opening the door
-
-    if (id == ACTOR_EN_TALK_GIBUD) {
+    if (id == ACTOR_EN_TALK_GIBUD || id == ACTOR_EN_FIREFLY) {
         Actor_Kill(actor);
     }
+
 }

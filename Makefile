@@ -1,12 +1,6 @@
 BUILD_DIR := build
 MOD_TOML := ./mod.toml
 
-ifeq ($(OS),Windows_NT)
-    PYTHON_EXEC ?= python
-else
-    PYTHON_EXEC ?= python3
-endif
-
 # Allow the user to specify the compiler and linker on macOS
 # as Apple Clang does not support MIPS architecture
 ifeq ($(OS),Windows_NT)
@@ -23,14 +17,12 @@ endif
 TARGET  := $(BUILD_DIR)/mod.elf
 
 ifeq ($(OS),Windows_NT)
+    PYTHON_EXEC ?= python
     RECOMP_MOD_TOOL := ./RecompModTool.exe
+    MOD_DIR := $(subst \,/,$(USERPROFILE))/AppData/Local/Zelda64Recompiled/mods
 else
+    PYTHON_EXEC ?= python3
     RECOMP_MOD_TOOL := ./RecompModTool
-endif
-
-ifeq ($(OS),Windows_NT)
-	MOD_DIR := $(subst \,/,$(USERPROFILE))/AppData/Local/Zelda64Recompiled/mods
-else
     MOD_DIR := $(HOME)/.config/Zelda64Recompiled/mods
 endif
 
@@ -75,6 +67,9 @@ no-post-build: $(TARGET)
 
 post-build: $(TARGET)
 	$(RECOMP_MOD_TOOL) $(MOD_TOML) $(BUILD_DIR) && mkdir -p "$(MOD_DIR)" && cp $(BUILD_DIR)/*.nrm "$(MOD_DIR)"
+
+thunderstore:
+	$(PYTHON_EXEC) ./create_thunderstore_package.py
 
 clean:
 ifeq ($(OS),Windows_NT)

@@ -9,6 +9,9 @@ RECOMP_CALLBACK("*", recomp_after_actor_init)
 void Zora_Cape_Coast_AfterActorInit(PlayState* play, Actor* actor) {
     s32 actorListIndex = GetActorListIndex(actor);
 
+    if(gSaveContext.gameMode != GAMEMODE_NORMAL)
+        return;
+
     /*
         0 = All
         1 = Overworld
@@ -24,9 +27,10 @@ void Zora_Cape_Coast_AfterActorInit(PlayState* play, Actor* actor) {
         ACTOR_EN_NEO_REEBA = Leever
         ACTOR_EN_RR = Like Like
         ACTOR_EN_PR2 = Skullfish
+        ACTOR_EN_CROW = Guay
     */
 
-    if (id == ACTOR_EN_NEO_REEBA || id == ACTOR_EN_RR || id == ACTOR_EN_PR2) {
+    if (id == ACTOR_EN_NEO_REEBA || id == ACTOR_EN_RR || id == ACTOR_EN_PR2 || id == ACTOR_EN_CROW) {
         Actor_Kill(actor);
     }
 }

@@ -6,7 +6,7 @@
 RECOMP_IMPORT("ProxyMM_ActorListIndex", s32 GetActorListIndex(Actor* actor));
 
 RECOMP_CALLBACK("*", recomp_after_actor_init)
-void Woodfall_Temple_AfterActorInit(PlayState* play, Actor* actor) {
+void Stone_Tower_AfterActorInit(PlayState* play, Actor* actor) {
     s32 actorListIndex = GetActorListIndex(actor);
 
     if(gSaveContext.gameMode != GAMEMODE_NORMAL)
@@ -18,20 +18,17 @@ void Woodfall_Temple_AfterActorInit(PlayState* play, Actor* actor) {
         2 = Temples
     */
 
-    if (play->sceneId != SCENE_MITURIN || recomp_get_config_u32("enemy_removal") == 1)
+    if (play->sceneId != SCENE_F40 || recomp_get_config_u32("enemy_removal") == 1)
         return;
 
     s32 id = actor->id;
 
     /*
-        ACTOR_EN_GRASSHOPPER = Dragonfly
-        ACTOR_EN_MKK = Boe (Black or White)
-        ACTOR_EN_DEKUBABA = Deku Baba
-        ACTOR_EN_KAREBABA = Wilted Deku Baba
-        ACTOR_EN_ST = Skulltula
+        ACTOR_EN_VM = Beamos
+        ACTOR_EN_FIREFLY = Keese (Normal, Ice or Fire)
     */
 
-    if (id == ACTOR_EN_GRASSHOPPER || id == ACTOR_EN_MKK || id == ACTOR_EN_DEKUBABA || id == ACTOR_EN_KAREBABA || id == ACTOR_EN_ST) {
+    if (id == ACTOR_EN_VM || id == ACTOR_EN_FIREFLY) {
         Actor_Kill(actor);
     }
 }

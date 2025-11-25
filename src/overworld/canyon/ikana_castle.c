@@ -9,6 +9,9 @@ RECOMP_CALLBACK("*", recomp_after_actor_init)
 void Ikana_Castle_AfterActorInit(PlayState* play, Actor* actor) {
     s32 actorListIndex = GetActorListIndex(actor);
 
+    if(gSaveContext.gameMode != GAMEMODE_NORMAL)
+        return;
+
     /*
         0 = All
         1 = Overworld

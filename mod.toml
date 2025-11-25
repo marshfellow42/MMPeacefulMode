@@ -77,11 +77,3 @@ description = "Destroy the boulder blocking Romani Ranch early."
 type = "Enum"
 options = [ "On", "Off" ]
 default = "Off"
-
-[[manifest.config_options]]
-id = "debug_console"
-name = "Debug Console"
-description = "Enable Debug Console (may cause slow downs)."
-type = "Enum"
-options = [ "On", "Off" ]
-default = "Off"

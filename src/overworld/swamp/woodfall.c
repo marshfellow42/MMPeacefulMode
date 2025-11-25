@@ -9,6 +9,9 @@ RECOMP_CALLBACK("*", recomp_after_actor_init)
 void Woodfall_AfterActorInit(PlayState* play, Actor* actor) {
     s32 actorListIndex = GetActorListIndex(actor);
 
+    if(gSaveContext.gameMode != GAMEMODE_NORMAL)
+        return;
+
     /*
         0 = All
         1 = Overworld
@@ -46,6 +49,5 @@ void Woodfall_AfterActorInit(PlayState* play, Actor* actor) {
 
     if (id == ACTOR_EN_GRASSHOPPER || id == ACTOR_EN_PP) {
         Actor_Kill(actor);
-        return;
     }
 }
