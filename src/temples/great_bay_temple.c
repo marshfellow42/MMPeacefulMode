@@ -18,7 +18,9 @@ void Great_Bay_Temple_AfterActorInit(PlayState* play, Actor* actor) {
         2 = Temples
     */
 
-    if (play->sceneId != SCENE_SEA || recomp_get_config_u32("enemy_removal") == 1)
+    // For now this scene will be disabled until I discover how to open locked doors
+
+    if (play->sceneId == SCENE_SEA || recomp_get_config_u32("enemy_removal") == 1)
         return;
 
     s32 id = actor->id;

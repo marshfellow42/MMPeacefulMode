@@ -18,7 +18,9 @@ void Woodfall_Temple_AfterActorInit(PlayState* play, Actor* actor) {
         2 = Temples
     */
 
-    if (play->sceneId != SCENE_MITURIN || recomp_get_config_u32("enemy_removal") == 1)
+    // For now this scene will be disabled until I discover how to open locked doors
+
+    if (play->sceneId == SCENE_MITURIN || recomp_get_config_u32("enemy_removal") == 1)
         return;
 
     s32 id = actor->id;
@@ -29,9 +31,32 @@ void Woodfall_Temple_AfterActorInit(PlayState* play, Actor* actor) {
         ACTOR_EN_DEKUBABA = Deku Baba
         ACTOR_EN_KAREBABA = Wilted Deku Baba
         ACTOR_EN_ST = Skulltula
+        ACTOR_EN_KAME = Snapper
+        ACTOR_EN_DINOFOS = Dinolfos
+        ACTOR_EN_BIGPAMET = Gekko & Snapper Miniboss - Snapper
+        ACTOR_EN_PAMETFROG = Gekko & Snapper Miniboss - Gekko
     */
 
-    if (id == ACTOR_EN_GRASSHOPPER || id == ACTOR_EN_MKK || id == ACTOR_EN_DEKUBABA || id == ACTOR_EN_KAREBABA || id == ACTOR_EN_ST) {
+    if (play->roomCtx.curRoom.num == 3 && actorListIndex == 3) {
+        // Kill the Skulltula and replace his actor with the Stray Fairy
+        float posX = actor->world.pos.x;
+        float posY = actor->world.pos.y;
+        float posZ = actor->world.pos.z;
+
+        s16 rotX = actor->world.rot.x;
+        s16 rotY = actor->world.rot.y;
+        s16 rotZ = actor->world.rot.z;
+
+        s16 params = 0x5E02;
+
+        Actor_Kill(actor);
+
+        Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELFORG, posX, posY, posZ, rotX, rotY, rotZ, params);
+
+        return;
+    }
+
+    if (id == ACTOR_EN_GRASSHOPPER || id == ACTOR_EN_MKK || id == ACTOR_EN_DEKUBABA || id == ACTOR_EN_KAREBABA || id == ACTOR_EN_ST || id == ACTOR_EN_KAME || id == ACTOR_EN_DINOFOS || id == ACTOR_EN_BIGPAMET || id == ACTOR_EN_PAMETFROG) {
         Actor_Kill(actor);
     }
 }

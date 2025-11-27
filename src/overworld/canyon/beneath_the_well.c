@@ -18,7 +18,9 @@ void Beneath_The_Well_AfterActorInit(PlayState* play, Actor* actor) {
         2 = Temples
     */
 
-    if (play->sceneId != SCENE_REDEAD || recomp_get_config_u32("enemy_removal") == 2)
+    // For now this scene will be disabled until I discover how to open doors
+
+    if (play->sceneId == SCENE_REDEAD || recomp_get_config_u32("enemy_removal") == 2)
         return;
 
     s32 id = actor->id;
@@ -30,6 +32,11 @@ void Beneath_The_Well_AfterActorInit(PlayState* play, Actor* actor) {
 
     if (id == ACTOR_EN_TALK_GIBUD || id == ACTOR_EN_FIREFLY) {
         Actor_Kill(actor);
+    }
+
+    if (id == ACTOR_DOOR_SHUTTER) {
+        // Need to call this function for the door to open, but how?
+        // func_808A1784(ds, play);
     }
 
 }

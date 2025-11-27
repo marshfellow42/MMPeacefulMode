@@ -28,7 +28,7 @@ authors = [ "Marshfellow42" ]
 game_id = "mm"
 
 # Minimum version of the target recomp (e.g. Zelda 64: Recompiled) that this mod can run on.
-minimum_recomp_version = "1.2.2"
+minimum_recomp_version = "1.2.0"
 
 # Dependency mods. Each entry is the mod's ID and then an optional minimum version of the dependency mod.
 dependencies = [ "ProxyMM_ActorListIndex:0.0.3" ]
@@ -67,7 +67,8 @@ id = "enemy_removal"
 name = "Enemy Removal"
 description = "Select which parts of the world to remove the enemies."
 type = "Enum"
-options = [ "All", "Overworld", "Temples" ]
+options = [ "All", "Overworld" ]
+# options = [ "All", "Overworld", "Temples" ]
 default = "All"
 
 [[manifest.config_options]]

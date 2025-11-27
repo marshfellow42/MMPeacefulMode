@@ -11,6 +11,6 @@
 patches.map
 build/
 .vscode/settings.json
-thunderstore_package/*
-dist/*
-./user_build_config.json
+thunderstore_package/
+dist/
+user_build_config.json
