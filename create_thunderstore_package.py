@@ -153,7 +153,7 @@ def create_package():
 
     if icon_ok and mod_ok:
         print("Packaging mod...")
-        out_zip = DIST_DIR / f"{manifest['name'].lower()}-{manifest['version_number']}.thunderstore.zip"
+        out_zip = DIST_DIR / f"{manifest['name']}-{manifest['version_number']}.thunderstore.zip"
         create_archive(PACKAGE_DIR, out_zip)
         print(f"Done → {out_zip}")
     else:
