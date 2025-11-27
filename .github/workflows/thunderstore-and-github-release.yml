@@ -66,15 +66,10 @@ jobs:
       uses: softprops/action-gh-release@v2
       if: startsWith(github.ref, 'refs/tags/')
       with:
-        name: Release ${{ steps.read_thunderstore_manifest.outputs.version }}
+        name: v${{ steps.read_thunderstore_manifest.outputs.version }}
         files: |
           ./dist/*thunderstore.zip
         make_latest: true
-
-    - name: Lowercase manifest name
-      id: lower_name
-      run: |
-        echo "lowercase_name=$(echo '${{ steps.read_thunderstore_manifest.outputs.name }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
 
     - name: Publish Thunderstore Release
       id: publish_thunderstore_release
@@ -89,6 +84,6 @@ jobs:
         version: ${{ steps.read_thunderstore_manifest.outputs.version }}
         categories: | # valid categories are 'audio', 'misc', 'libraries', 'modpacks', and 'mods'.
           mods
-        file: ./dist/${{ steps.lower_name.outputs.lowercase_name }}-${{ steps.read_thunderstore_manifest.outputs.version }}.thunderstore.zip
+        file: ./dist/${{ steps.read_thunderstore_manifest.outputs.name }}-${{ steps.read_thunderstore_manifest.outputs.version }}.thunderstore.zip
 
 
