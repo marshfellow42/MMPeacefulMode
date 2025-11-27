@@ -27,6 +27,12 @@ jobs:
       run: |-
         sudo apt install -y clang lld make
 
+    - name: Install RecompModTool
+      id: install_recompmodtool
+      run: |
+        wget -O RecompModTool https://github.com/N64Recomp/N64Recomp/releases/download/mod-tool-release/RecompModTool
+        chmod +x RecompModTool
+
     - name: Run Buildscript
       id: run_buildscript
       run: |-
