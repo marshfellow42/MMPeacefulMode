@@ -75,7 +75,7 @@ clean:
 ifeq ($(OS),Windows_NT)
 	cmd /C rmdir /S /Q $(subst /,\,$(BUILD_DIR))
 else
-    rm -rf $(BUILD_DIR)
+	rm -rf $(BUILD_DIR)
 endif
 
 -include $(ALL_DEPS)
