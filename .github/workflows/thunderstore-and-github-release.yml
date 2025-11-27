@@ -57,13 +57,8 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/')
       with:
         name: Release ${{ steps.read_thunderstore_manifest.outputs.version }}
-        body_path: ./thunderstore_package/CHANGELOG.md
         files: |
-          ./thunderstore_package/*.nrm
-          ./thunderstore_package/*.dll
-          ./thunderstore_package/*.dylib
-          ./thunderstore_package/*.so
-          ./*thunderstore.zip
+          ./dist/*thunderstore.zip
         make_latest: true
 
     - name: Publish Thunderstore Release
@@ -79,6 +74,6 @@ jobs:
         version: ${{ steps.read_thunderstore_manifest.outputs.version }}
         categories: | # valid categories are 'audio', 'misc', 'libraries', 'modpacks', and 'mods'.
           mods
-        file: ./${{ steps.read_thunderstore_manifest.outputs.name }}.thunderstore.zip
+        file: ./dist/${{ lower(steps.read_thunderstore_manifest.outputs.name) }}-${{ steps.read_thunderstore_manifest.outputs.version }}.thunderstore.zip
 
 
