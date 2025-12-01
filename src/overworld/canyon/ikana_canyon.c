@@ -26,11 +26,10 @@ void Ikana_Canyon_AfterActorInit(PlayState* play, Actor* actor) {
     /*
         ACTOR_EN_BB = Blue Bubbles
         ACTOR_EN_RAILGIBUD = Music Box House - Patrolling Gibdos
-        ACTOR_EN_OKUTA = Octorok
         ACTOR_EN_CROW = Guay
     */
 
-    if (id == ACTOR_EN_BB || id == ACTOR_EN_RAILGIBUD || id == ACTOR_EN_OKUTA || id == ACTOR_EN_CROW) {
+    if (id == ACTOR_EN_BB || id == ACTOR_EN_RAILGIBUD || id == ACTOR_EN_CROW) {
         Actor_Kill(actor);
     }
 }

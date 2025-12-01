@@ -2,6 +2,7 @@
 #include "global.h"
 #include "recomputils.h"
 #include "recompconfig.h"
+#include "overlays/actors/ovl_Door_Shutter/z_door_shutter.h"
 
 RECOMP_IMPORT("ProxyMM_ActorListIndex", s32 GetActorListIndex(Actor* actor));
 
@@ -18,9 +19,7 @@ void Woodfall_Temple_AfterActorInit(PlayState* play, Actor* actor) {
         2 = Temples
     */
 
-    // For now this scene will be disabled until I discover how to open locked doors
-
-    if (play->sceneId == SCENE_MITURIN || recomp_get_config_u32("enemy_removal") == 1)
+    if (play->sceneId != SCENE_MITURIN || recomp_get_config_u32("enemy_removal") == 1)
         return;
 
     s32 id = actor->id;
@@ -35,6 +34,7 @@ void Woodfall_Temple_AfterActorInit(PlayState* play, Actor* actor) {
         ACTOR_EN_DINOFOS = Dinolfos
         ACTOR_EN_BIGPAMET = Gekko & Snapper Miniboss - Snapper
         ACTOR_EN_PAMETFROG = Gekko & Snapper Miniboss - Gekko
+        ACTOR_BOSS_01 = Odolwa
     */
 
     if (play->roomCtx.curRoom.num == 3 && actorListIndex == 3) {
@@ -59,4 +59,24 @@ void Woodfall_Temple_AfterActorInit(PlayState* play, Actor* actor) {
     if (id == ACTOR_EN_GRASSHOPPER || id == ACTOR_EN_MKK || id == ACTOR_EN_DEKUBABA || id == ACTOR_EN_KAREBABA || id == ACTOR_EN_ST || id == ACTOR_EN_KAME || id == ACTOR_EN_DINOFOS || id == ACTOR_EN_BIGPAMET || id == ACTOR_EN_PAMETFROG) {
         Actor_Kill(actor);
     }
+
+    /*
+    if (recomp_get_config_u32("kill_bosses") == 0) {
+        if (id == ACTOR_BOSS_01) {
+            Actor_Kill(actor);
+        }
+    }
+    */
+}
+
+RECOMP_HOOK("DoorShutter_SetupDoor")
+void Woodfall_Temple_DoorShutter_UnlockAllDoors(DoorShutter* this, PlayState* play) {
+    if(gSaveContext.gameMode != GAMEMODE_NORMAL)
+        return;
+
+    if (play->sceneId != SCENE_MITURIN || recomp_get_config_u32("enemy_removal") == 1)
+        return;
+
+    Flags_SetClear(play, this->slidingDoor.dyna.actor.room);
+    Flags_SetSwitch(play, DOORSHUTTER_GET_SWITCH_FLAG(&this->slidingDoor.dyna.actor));
 }

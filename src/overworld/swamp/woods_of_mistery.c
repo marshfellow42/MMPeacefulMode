@@ -25,9 +25,10 @@ void Woods_Of_Mistery_AfterActorInit(PlayState* play, Actor* actor) {
 
     /*
         ACTOR_EN_KAME = Snapper
+        ACTOR_EN_ELFORG = Stray Fairy (somehow a stray fairy summoned here)
     */
 
-    if (id == ACTOR_EN_KAME) {
+    if (id == ACTOR_EN_KAME || id == ACTOR_EN_ELFORG) {
         Actor_Kill(actor);
     }
 }
