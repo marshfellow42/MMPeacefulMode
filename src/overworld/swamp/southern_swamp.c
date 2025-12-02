@@ -21,8 +21,6 @@ void Southern_Swamp_AfterActorInit(PlayState* play, Actor* actor) {
     if (play->sceneId != SCENE_20SICHITAI || recomp_get_config_u32("enemy_removal") == 2)
         return;
 
-    s32 id = actor->id;
-
     /*
         ACTOR_EN_BIGOKUTA = Big Octorock
         ACTOR_EN_DEKUBABA = Deku Baba
@@ -30,7 +28,12 @@ void Southern_Swamp_AfterActorInit(PlayState* play, Actor* actor) {
         ACTOR_EN_GRASSHOPPER = Dragonfly
     */
 
-    if (id == ACTOR_EN_BIGOKUTA || id == ACTOR_EN_DEKUBABA || id == ACTOR_EN_KAREBABA || id == ACTOR_EN_GRASSHOPPER) {
-        Actor_Kill(actor);
+    switch (actor->id) {
+        case ACTOR_EN_BIGOKUTA:
+        case ACTOR_EN_DEKUBABA:
+        case ACTOR_EN_KAREBABA:
+        case ACTOR_EN_GRASSHOPPER:
+            Actor_Kill(actor);
+            break;
     }
 }

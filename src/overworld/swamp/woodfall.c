@@ -21,33 +21,29 @@ void Woodfall_AfterActorInit(PlayState* play, Actor* actor) {
     if (play->sceneId != SCENE_21MITURINMAE || recomp_get_config_u32("enemy_removal") == 2)
         return;
 
-    s32 id = actor->id;
-
     /*
         ACTOR_EN_DEKUNUTS = Mad Scrub
         ACTOR_EN_GRASSHOPPER = Dragonfly
         ACTOR_EN_PP = Hiploop
     */
 
-    if (id == ACTOR_EN_DEKUNUTS) {
-        float posX = actor->world.pos.x;
-        float posY = actor->world.pos.y;
-        float posZ = actor->world.pos.z;
+    switch (actor->id) {
+        case ACTOR_EN_PP:
+        case ACTOR_EN_GRASSHOPPER:
+            Actor_Kill(actor);
+            break;
+        case ACTOR_EN_DEKUNUTS: {
+            Vec3f pos = actor->world.pos;
+            Vec3s rot = actor->world.rot;
 
-        s16 rotX = actor->world.rot.x;
-        s16 rotY = actor->world.rot.y;
-        s16 rotZ = actor->world.rot.z;
+            s16 params = 0x0080;
 
-        s16 params = 0x0080;
+            Actor_Kill(actor);
 
-        Actor_Kill(actor);
+            Actor_Spawn(&play->actorCtx, play, ACTOR_OBJ_ETCETERA, pos.x, pos.y, pos.z, rot.x, rot.y, rot.z, params);
 
-        Actor_Spawn(&play->actorCtx, play, ACTOR_OBJ_ETCETERA, posX, posY, posZ, rotX, rotY, rotZ, params);
-
-        return;
+            return;
+        }
     }
 
-    if (id == ACTOR_EN_GRASSHOPPER || id == ACTOR_EN_PP) {
-        Actor_Kill(actor);
-    }
 }

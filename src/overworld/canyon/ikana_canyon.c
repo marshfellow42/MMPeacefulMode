@@ -21,15 +21,17 @@ void Ikana_Canyon_AfterActorInit(PlayState* play, Actor* actor) {
     if (play->sceneId != SCENE_IKANA || recomp_get_config_u32("enemy_removal") == 2)
         return;
 
-    s32 id = actor->id;
-
     /*
         ACTOR_EN_BB = Blue Bubbles
         ACTOR_EN_RAILGIBUD = Music Box House - Patrolling Gibdos
         ACTOR_EN_CROW = Guay
     */
 
-    if (id == ACTOR_EN_BB || id == ACTOR_EN_RAILGIBUD || id == ACTOR_EN_CROW) {
-        Actor_Kill(actor);
+    switch (actor->id) {
+        case ACTOR_EN_BB:
+        case ACTOR_EN_RAILGIBUD:
+        case ACTOR_EN_CROW:
+            Actor_Kill(actor);
+            break;
     }
 }

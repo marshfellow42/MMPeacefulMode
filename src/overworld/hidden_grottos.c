@@ -23,8 +23,6 @@ void Hidden_Grottos_AfterActorInit(PlayState* play, Actor* actor) {
     if (play->sceneId != SCENE_KAKUSIANA || recomp_get_config_u32("enemy_removal") == 2)
         return;
 
-    s32 id = actor->id;
-
     /*
         ACTOR_EN_PEEHAT = Peahat
         ACTOR_EN_DEKUBABA = Deku Baba
@@ -32,7 +30,12 @@ void Hidden_Grottos_AfterActorInit(PlayState* play, Actor* actor) {
         ACTOR_EN_KAREBABA = Wilted Deku Baba
     */
 
-    if (id == ACTOR_EN_PEEHAT || id == ACTOR_EN_DEKUBABA || id == ACTOR_EN_DODONGO || id == ACTOR_EN_KAREBABA) {
-        Actor_Kill(actor);
+    switch (actor->id) {
+        case ACTOR_EN_PEEHAT:
+        case ACTOR_EN_DEKUBABA:
+        case ACTOR_EN_DODONGO:
+        case ACTOR_EN_KAREBABA:
+            Actor_Kill(actor);
+            break;
     }
 }

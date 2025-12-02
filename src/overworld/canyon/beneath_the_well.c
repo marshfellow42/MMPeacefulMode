@@ -22,8 +22,6 @@ void Beneath_The_Well_AfterActorInit(PlayState* play, Actor* actor) {
     if (play->sceneId != SCENE_REDEAD || recomp_get_config_u32("enemy_removal") == 2)
         return;
 
-    s32 id = actor->id;
-
     /*
         ACTOR_EN_TALK_GIBUD = Gibdo Requesting an Item
         ACTOR_EN_FIREFLY = Keese (Normal, Ice or Fire)
@@ -38,10 +36,94 @@ void Beneath_The_Well_AfterActorInit(PlayState* play, Actor* actor) {
         ACTOR_EN_WDHAND = Dexihand
     */
 
-    if (id == ACTOR_EN_TALK_GIBUD || id == ACTOR_EN_FIREFLY || id == ACTOR_EN_FZ || id == ACTOR_EN_ELFORG || id == ACTOR_EN_BIGPO || id == ACTOR_EN_HONOTRAP || id == ACTOR_EN_DEKUBABA || id == ACTOR_EN_KAREBABA || id == ACTOR_EN_WALLMAS || id == ACTOR_EN_ST || id == ACTOR_EN_WDHAND) {
-        Actor_Kill(actor);
-    }
+    switch (play->roomCtx.curRoom.num) {
+        case 1:
+            switch (actor->id) {
+                case ACTOR_EN_FZ:
+                    Actor_Kill(actor);
+                    break;
 
+                case ACTOR_EN_FIREFLY:
+                    Actor_Kill(actor);
+                    break;
+
+                case ACTOR_EN_KAREBABA:
+                    Actor_Kill(actor);
+                    break;
+            }
+
+        case 3:
+            switch (actor->id) {
+                case ACTOR_EN_FIREFLY:
+                    Actor_Kill(actor);
+                    break;
+
+                case ACTOR_EN_HONOTRAP:
+                    Actor_Kill(actor);
+                    break;
+            }
+
+        case 4:
+            switch (actor->id) {
+                case ACTOR_EN_WDHAND:
+                    Actor_Kill(actor);
+                    break;
+
+                case ACTOR_EN_HONOTRAP:
+                    Actor_Kill(actor);
+                    break;
+            }
+
+        case 6:
+            switch (actor->id) {
+                case ACTOR_EN_DEKUBABA:
+                    Actor_Kill(actor);
+                    break;
+
+                case ACTOR_EN_KAREBABA:
+                    Actor_Kill(actor);
+                    break;
+            }
+
+        case 7:
+            switch (actor->id) {
+                case ACTOR_EN_ST:
+                    Actor_Kill(actor);
+                    break;
+            }
+
+        case 8:
+            switch (actor->id) {
+                case ACTOR_EN_ST:
+                    Actor_Kill(actor);
+                    break;
+            }
+
+        case 10:
+            switch (actor->id) {
+                case ACTOR_EN_FIREFLY:
+                    Actor_Kill(actor);
+                    break;
+            }
+
+        case 12:
+            switch (actor->id) {
+                case ACTOR_EN_BIGPO:
+                    Actor_Kill(actor);
+                    break;
+            }
+
+        default:
+            switch (actor->id) {
+                case ACTOR_EN_TALK_GIBUD:
+                    Actor_Kill(actor);
+                    break;
+
+                case ACTOR_EN_WALLMAS:
+                    Actor_Kill(actor);
+                    break;
+            }
+    }
 }
 
 RECOMP_HOOK("DoorShutter_SetupDoor")

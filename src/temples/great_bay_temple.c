@@ -37,9 +37,25 @@ void Great_Bay_Temple_AfterActorInit(PlayState* play, Actor* actor) {
 
 
     switch (play->roomCtx.curRoom.num) {
-        case 10:
-            if (id == ACTOR_EN_RAT || id == ACTOR_EN_SLIME) {
+        case 8:
+            if (actorListIndex == 7) {
+                // Kill the Skulltula and replace his actor with the Stray Fairy
+                Vec3f pos = actor->world.pos;
+                Vec3s rot = actor->world.rot;
+                s16 params = 0x6002;
+
                 Actor_Kill(actor);
+                Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELFORG, pos.x, pos.y, pos.z, rot.x, rot.y, rot.z, params);
+
+                return;
+            }
+
+        case 10:
+            switch (actor->id) {
+                case ACTOR_EN_RAT:
+                case ACTOR_EN_SLIME:
+                    Actor_Kill(actor);
+                    break;
             }
             break;
 
@@ -49,7 +65,6 @@ void Great_Bay_Temple_AfterActorInit(PlayState* play, Actor* actor) {
             }
             break;
     }
-
 }
 
 RECOMP_HOOK("DoorShutter_SetupDoor")

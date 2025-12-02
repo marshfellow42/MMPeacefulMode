@@ -23,8 +23,6 @@ void Woodfall_Temple_AfterActorInit(PlayState* play, Actor* actor) {
     if (play->sceneId != SCENE_MITURIN || recomp_get_config_u32("enemy_removal") == 1)
         return;
 
-    s32 id = actor->id;
-
     /*
         ACTOR_EN_GRASSHOPPER = Dragonfly
         ACTOR_EN_MKK = Boe (Black or White)
@@ -38,27 +36,65 @@ void Woodfall_Temple_AfterActorInit(PlayState* play, Actor* actor) {
         ACTOR_BOSS_01 = Odolwa
     */
 
-    if (play->roomCtx.curRoom.num == 3 && actorListIndex == 3) {
-        // Kill the Skulltula and replace his actor with the Stray Fairy
-        float posX = actor->world.pos.x;
-        float posY = actor->world.pos.y;
-        float posZ = actor->world.pos.z;
+    switch (play->roomCtx.curRoom.num) {
+        case 1:
+            switch (actor->id) {
+                case ACTOR_EN_DEKUBABA:
+                case ACTOR_EN_KAREBABA:
+                    Actor_Kill(actor);
+                    break;
+            }
+            break;
 
-        s16 rotX = actor->world.rot.x;
-        s16 rotY = actor->world.rot.y;
-        s16 rotZ = actor->world.rot.z;
+        case 2:
+            switch (actor->id) {
+                case ACTOR_EN_ST:
+                case ACTOR_EN_MKK:
+                    Actor_Kill(actor);
+                    break;
+            }
+            break;
 
-        s16 params = 0x5E02;
+        case 3:
+            if (actorListIndex == 3) {
+                // Kill the Skulltula and replace its actor with the Stray Fairy
+                Vec3f pos = actor->world.pos;
+                Vec3s rot = actor->world.rot;
 
-        Actor_Kill(actor);
+                s16 params = 0x5E02;
 
-        Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELFORG, posX, posY, posZ, rotX, rotY, rotZ, params);
+                Actor_Kill(actor);
 
-        return;
-    }
+                Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELFORG, pos.x, pos.y, pos.z, rot.x, rot.y, rot.z, params);
 
-    if (id == ACTOR_EN_GRASSHOPPER || id == ACTOR_EN_MKK || id == ACTOR_EN_DEKUBABA || id == ACTOR_EN_KAREBABA || id == ACTOR_EN_ST || id == ACTOR_EN_KAME || id == ACTOR_EN_DINOFOS || id == ACTOR_EN_BIGPAMET || id == ACTOR_EN_PAMETFROG) {
-        Actor_Kill(actor);
+                return;
+            }
+
+        case 6:
+            switch (actor->id) {
+                case ACTOR_EN_KAME:
+                    Actor_Kill(actor);
+                    break;
+            }
+            break;
+
+        case 7:
+            switch (actor->id) {
+                case ACTOR_EN_DINOFOS:
+                    Actor_Kill(actor);
+                    break;
+            }
+            break;
+
+        case 8:
+            switch (actor->id) {
+                case ACTOR_EN_BIGPAMET:
+                case ACTOR_EN_PAMETFROG:
+                    Actor_Kill(actor);
+                    break;
+            }
+            break;
+
     }
 
     /*

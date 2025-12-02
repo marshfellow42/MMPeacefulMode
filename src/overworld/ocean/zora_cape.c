@@ -21,8 +21,6 @@ void Zora_Cape_Coast_AfterActorInit(PlayState* play, Actor* actor) {
     if (play->sceneId != SCENE_31MISAKI || recomp_get_config_u32("enemy_removal") == 2)
         return;
 
-    s32 id = actor->id;
-
     /*
         ACTOR_EN_NEO_REEBA = Leever
         ACTOR_EN_RR = Like Like
@@ -30,7 +28,12 @@ void Zora_Cape_Coast_AfterActorInit(PlayState* play, Actor* actor) {
         ACTOR_EN_CROW = Guay
     */
 
-    if (id == ACTOR_EN_NEO_REEBA || id == ACTOR_EN_RR || id == ACTOR_EN_PR2 || id == ACTOR_EN_CROW) {
-        Actor_Kill(actor);
+    switch (actor->id) {
+        case ACTOR_EN_NEO_REEBA:
+        case ACTOR_EN_RR:
+        case ACTOR_EN_PR2:
+        case ACTOR_EN_CROW:
+            Actor_Kill(actor);
+            break;
     }
 }

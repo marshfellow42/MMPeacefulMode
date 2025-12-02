@@ -47,8 +47,21 @@ void Stone_Tower_Temple_AfterActorInit(PlayState* play, Actor* actor) {
         ACTOR_EN_MINIDEATH = Bats Surrounding Gomess
     */
 
-    if (id == ACTOR_EN_VM || id == ACTOR_EN_RAT || id == ACTOR_EN_CROW || id == ACTOR_EN_GRASSHOPPER || id == ACTOR_EN_AM || id == ACTOR_EN_EGOL || id == ACTOR_EN_WDHAND || id == ACTOR_BOSS_05 || id == ACTOR_EN_PR2 || id == ACTOR_EN_FAMOS || id == ACTOR_EN_BB || id == ACTOR_EN_PP || id == ACTOR_EN_WIZ || id == ACTOR_EN_POH || id == ACTOR_EN_MKK || id == ACTOR_EN_BAGUO || id == ACTOR_EN_DEATH || id == ACTOR_EN_MINIDEATH) {
-        Actor_Kill(actor);
+    switch (play->roomCtx.curRoom.num) {
+        case 10:
+            switch (actor->id) {
+                case ACTOR_EN_RAT:
+                case ACTOR_EN_SLIME:
+                    Actor_Kill(actor);
+                    break;
+            }
+            break;
+
+        default:
+            if (id == ACTOR_BOSS_05 || id == ACTOR_EN_PR2 || id == ACTOR_EN_WDHAND || id == ACTOR_EN_RAT || id == ACTOR_EN_SB || id == ACTOR_EN_TITE || id == ACTOR_EN_SLIME) {
+                Actor_Kill(actor);
+            }
+            break;
     }
 
     /*

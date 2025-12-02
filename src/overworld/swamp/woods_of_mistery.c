@@ -21,14 +21,15 @@ void Woods_Of_Mistery_AfterActorInit(PlayState* play, Actor* actor) {
     if (play->sceneId != SCENE_26SARUNOMORI || recomp_get_config_u32("enemy_removal") == 2)
         return;
 
-    s32 id = actor->id;
-
     /*
         ACTOR_EN_KAME = Snapper
         ACTOR_EN_ELFORG = Stray Fairy (somehow a stray fairy summoned here)
     */
 
-    if (id == ACTOR_EN_KAME || id == ACTOR_EN_ELFORG) {
-        Actor_Kill(actor);
+    switch (actor->id) {
+        case ACTOR_EN_KAME:
+        case ACTOR_EN_ELFORG:
+            Actor_Kill(actor);
+            break;
     }
 }

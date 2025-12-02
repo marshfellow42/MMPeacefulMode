@@ -23,8 +23,6 @@ void Snowhead_Temple_AfterActorInit(PlayState* play, Actor* actor) {
     if (play->sceneId != SCENE_HAKUGIN || recomp_get_config_u32("enemy_removal") == 1)
         return;
 
-    s32 id = actor->id;
-
     /*
         ACTOR_EN_WF = Wolfos
         ACTOR_EN_MKK = Boe (Black or White)
@@ -38,13 +36,9 @@ void Snowhead_Temple_AfterActorInit(PlayState* play, Actor* actor) {
         ACTOR_EN_DINOFOS = Dinolfos
     */
 
-    // There are two Stray Fairy in the Dinolfos killed, but they aren't spawned
-
-    /*
-
     switch (play->roomCtx.curRoom.num) {
         case 0:
-            switch (id) {
+            switch (actor->id) {
                 case ACTOR_EN_WF:
                 case ACTOR_EN_MKK:
                     Actor_Kill(actor);
@@ -53,37 +47,60 @@ void Snowhead_Temple_AfterActorInit(PlayState* play, Actor* actor) {
             break;
 
         case 2:
-            if (id == ACTOR_EN_FZ) {
-                Actor_Kill(actor);
+            switch (actor->id) {
+                case ACTOR_EN_FZ:
+                    Actor_Kill(actor);
+                    break;
             }
             break;
 
         case 4:
-            if (id == ACTOR_EN_BBFALL) {
-                Actor_Kill(actor);
+            switch (actor->id) {
+                case ACTOR_EN_BBFALL:
+                    Actor_Kill(actor);
+                    break;
             }
             break;
 
         case 6:
-            if (id == ACTOR_EN_WIZ) {
-                Actor_Kill(actor);
+            switch (actor->id) {
+                case ACTOR_EN_WIZ:
+                    Actor_Kill(actor);
+                    break;
             }
             break;
 
         case 9:
-            switch (id) {
+            switch (actor->id) {
                 case ACTOR_EN_RAT:
                 case ACTOR_EN_FZ:
                     Actor_Kill(actor);
                     break;
             }
             break;
-    }
 
-    */
+        case 10:
+            switch (actor->id) {
+                case ACTOR_EN_SNOWMAN:
+                    Actor_Kill(actor);
+                    break;
+            }
+            break;
 
-    if (id == ACTOR_EN_WF || id == ACTOR_EN_MKK || id == ACTOR_EN_FZ || id == ACTOR_EN_RAT || id == ACTOR_EN_FIREFLY || id == ACTOR_EN_BBFALL || id == ACTOR_EN_SNOWMAN || id == ACTOR_EN_WIZ || id == ACTOR_EN_TUBO_TRAP || id == ACTOR_EN_DINOFOS) {
-        Actor_Kill(actor);
+        case 11:
+            switch (actor->id) {
+                case ACTOR_EN_DINOFOS:
+                    Vec3f pos = actor->world.pos;
+                    Vec3s rot = actor->world.rot;
+                    s16 params = 0x3000;
+
+                    Actor_Kill(actor);
+                    Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELFORG, pos.x, pos.y, pos.z, rot.x, rot.y, rot.z, params);
+
+                    return;
+            }
+            break;
+
     }
 }
 

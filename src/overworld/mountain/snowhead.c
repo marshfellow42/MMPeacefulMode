@@ -21,14 +21,15 @@ void Snowhead_AfterActorInit(PlayState* play, Actor* actor) {
     if (play->sceneId != SCENE_12HAKUGINMAE || recomp_get_config_u32("enemy_removal") == 2)
         return;
 
-    s32 id = actor->id;
-
     /*
         ACTOR_EN_WF = Wolfos
         ACTOR_EN_MKK = Boe (Black or White)
     */
 
-    if (id == ACTOR_EN_WF || id == ACTOR_EN_MKK) {
-        Actor_Kill(actor);
+    switch (actor->id) {
+        case ACTOR_EN_WF:
+        case ACTOR_EN_MKK:
+            Actor_Kill(actor);
+            break;
     }
 }

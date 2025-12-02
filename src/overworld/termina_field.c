@@ -21,8 +21,6 @@ void Termina_Field_AfterActorInit(PlayState* play, Actor* actor) {
     if (play->sceneId != SCENE_00KEIKOKU || recomp_get_config_u32("enemy_removal") == 2)
         return;
 
-    s32 id = actor->id;
-
     /*
         ACTOR_EN_BB = Blue Bubbles
         ACTOR_EN_SLIME = Chuchu
@@ -36,7 +34,19 @@ void Termina_Field_AfterActorInit(PlayState* play, Actor* actor) {
         ACTOR_EN_RUPPECROW = Guay Circling Clock Town
     */
 
-    if (id == ACTOR_EN_BB || id == ACTOR_EN_SLIME || id == ACTOR_EN_DEKUBABA || id == ACTOR_EN_BAT || id == ACTOR_EN_THIEFBIRD || id == ACTOR_EN_NEO_REEBA || id == ACTOR_EN_DODONGO || id == ACTOR_EN_CROW || id == ACTOR_EN_RAT || id == ACTOR_EN_RUPPECROW) {
-        Actor_Kill(actor);
+    switch (actor->id) {
+        case ACTOR_EN_BB:
+        case ACTOR_EN_SLIME:
+        case ACTOR_EN_DEKUBABA:
+        case ACTOR_EN_BAT:
+        case ACTOR_EN_THIEFBIRD:
+        case ACTOR_EN_NEO_REEBA:
+        case ACTOR_EN_DODONGO:
+        case ACTOR_EN_CROW:
+        case ACTOR_EN_RAT:
+        case ACTOR_EN_RUPPECROW:
+            Actor_Kill(actor);
+            break;
     }
+
 }

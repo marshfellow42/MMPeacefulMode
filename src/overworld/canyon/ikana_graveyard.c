@@ -22,16 +22,18 @@ void Ikana_Graveyard_AfterActorInit(PlayState* play, Actor* actor) {
     if (play->sceneId != SCENE_BOTI || recomp_get_config_u32("enemy_removal") == 2)
         return;
 
-    s32 id = actor->id;
-
     /*
         ACTOR_EN_BAT = Bad Bat
-        ACTOR_EN_RAIL_SKB = Ikana Graveyard - Circle of Stalchildren
+        ACTOR_EN_SKB = Stalchildren
         ACTOR_BG_FIRE_WALL = Fire Wall
     */
 
-    if (id == ACTOR_EN_BAT || id == ACTOR_EN_SKB || id == ACTOR_BG_FIRE_WALL) {
-        Actor_Kill(actor);
+    switch (actor->id) {
+        case ACTOR_EN_BAT:
+        case ACTOR_EN_SKB:
+        case ACTOR_BG_FIRE_WALL:
+            Actor_Kill(actor);
+            break;
     }
 
 }
