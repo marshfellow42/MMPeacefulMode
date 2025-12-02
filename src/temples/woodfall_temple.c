@@ -3,6 +3,7 @@
 #include "recomputils.h"
 #include "recompconfig.h"
 #include "overlays/actors/ovl_Door_Shutter/z_door_shutter.h"
+#include "overlays/actors/ovl_En_Box/z_en_box.h"
 
 RECOMP_IMPORT("ProxyMM_ActorListIndex", s32 GetActorListIndex(Actor* actor));
 
@@ -79,4 +80,15 @@ void Woodfall_Temple_DoorShutter_UnlockAllDoors(DoorShutter* this, PlayState* pl
 
     Flags_SetClear(play, this->slidingDoor.dyna.actor.room);
     Flags_SetSwitch(play, DOORSHUTTER_GET_SWITCH_FLAG(&this->slidingDoor.dyna.actor));
+}
+
+RECOMP_HOOK("EnBox_Init")
+void Woodfall_Temple_ForceChestRoomClear(EnBox* this, PlayState* play) {
+    if (gSaveContext.gameMode != GAMEMODE_NORMAL)
+        return;
+
+    if (play->sceneId != SCENE_MITURIN || recomp_get_config_u32("enemy_removal") == 1)
+        return;
+
+    Flags_SetClear(play, this->dyna.actor.room);
 }
