@@ -24,25 +24,18 @@ void Stone_Tower_Temple_AfterActorInit(PlayState* play, Actor* actor) {
         return;
 
     /*
-        ACTOR_EN_VM = Beamos
-        ACTOR_EN_RAT = Real Bombchu
-        ACTOR_EN_CROW = Guay
         ACTOR_EN_GRASSHOPPER = Dragonfly
-        ACTOR_EN_AM = Armos
+        ACTOR_EN_RAT = Real Bombchu
         ACTOR_EN_EGOL = Eyegore
+        ACTOR_EN_VM = Beamos
         ACTOR_EN_WDHAND = Dexihand
+        ACTOR_EN_CROW = Guay
         ACTOR_BOSS_05 = Bio Deku Baba
         ACTOR_EN_PR2 = Skullfish
-        ACTOR_EN_FAMOS = Death Armos
-        ACTOR_EN_BB = Blue Bubbles
-        ACTOR_EN_PP = Hiploop
-        ACTOR_EN_WIZ = Wizzrobe
-        ACTOR_EN_POH = Poe
-        ACTOR_BOSS_02 = Twinmold
+        ACTOR_EN_AM = Armos
         ACTOR_EN_MKK = Boe (Black or White)
         ACTOR_EN_BAGUO = Nejiron
-        ACTOR_EN_DEATH = Gomess
-        ACTOR_EN_MINIDEATH = Bats Surrounding Gomess
+        ACTOR_EN_PP = Hiploop
         ACTOR_EN_JSO2 = Garo Master
     */
 
@@ -120,14 +113,6 @@ void Stone_Tower_Temple_AfterActorInit(PlayState* play, Actor* actor) {
             break;
 
     }
-
-    /*
-    if (recomp_get_config_u32("kill_bosses") == 0) {
-        if (id == ACTOR_BOSS_02) {
-            Actor_Kill(actor);
-        }
-    }
-    */
 }
 
 RECOMP_HOOK("DoorShutter_SetupDoor")

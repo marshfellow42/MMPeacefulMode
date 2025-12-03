@@ -70,13 +70,13 @@ type = "Enum"
 options = [ "All", "Overworld", "Temples" ]
 default = "All"
 
-#[[manifest.config_options]]
-#id = "kill_bosses"
-#name = "Kill Bosses"
-#description = "Kill all the bosses in the temples."
-#type = "Enum"
-#options = [ "On", "Off" ]
-#default = "Off"
+[[manifest.config_options]]
+id = "kill_bosses"
+name = "Kill Bosses"
+description = "Kill all the bosses in the temples."
+type = "Enum"
+options = [ "On", "Off" ]
+default = "Off"
 
 [[manifest.config_options]]
 id = "unlock_romani"

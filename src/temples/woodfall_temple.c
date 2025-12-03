@@ -124,14 +124,6 @@ void Woodfall_Temple_AfterActorInit(PlayState* play, Actor* actor) {
             }
             break;
     }
-
-    /*
-    if (recomp_get_config_u32("kill_bosses") == 0) {
-        if (id == ACTOR_BOSS_01) {
-            Actor_Kill(actor);
-        }
-    }
-    */
 }
 
 RECOMP_HOOK("DoorShutter_SetupDoor")

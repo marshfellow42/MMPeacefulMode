@@ -46,9 +46,25 @@ void Snowhead_Temple_AfterActorInit(PlayState* play, Actor* actor) {
             }
             break;
 
+        case 1:
+            switch (actor->id) {
+                case ACTOR_EN_WF:
+                    Actor_Kill(actor);
+                    break;
+            }
+            break;
+
         case 2:
             switch (actor->id) {
                 case ACTOR_EN_FZ:
+                    Actor_Kill(actor);
+                    break;
+            }
+            break;
+
+        case 3:
+            switch (actor->id) {
+                case ACTOR_EN_TUBO_TRAP:
                     Actor_Kill(actor);
                     break;
             }
@@ -62,9 +78,25 @@ void Snowhead_Temple_AfterActorInit(PlayState* play, Actor* actor) {
             }
             break;
 
+        case 5:
+            switch (actor->id) {
+                case ACTOR_EN_FZ:
+                    Actor_Kill(actor);
+                    break;
+            }
+            break;
+
         case 6:
             switch (actor->id) {
                 case ACTOR_EN_WIZ:
+                    Actor_Kill(actor);
+                    break;
+            }
+            break;
+
+        case 8:
+            switch (actor->id) {
+                case ACTOR_EN_MKK:
                     Actor_Kill(actor);
                     break;
             }
@@ -89,16 +121,30 @@ void Snowhead_Temple_AfterActorInit(PlayState* play, Actor* actor) {
 
         case 11:
             switch (actor->id) {
-                case ACTOR_EN_DINOFOS: {
+                case ACTOR_EN_DINOFOS:
+                    Actor_Kill(actor);
+                    break;
+            }
+
+            switch (actorListIndex) {
+                case 0:
+                case 1: {
                     Vec3f pos = actor->world.pos;
                     Vec3s rot = actor->world.rot;
                     s16 params = 0x3000;
 
                     Actor_Kill(actor);
                     Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELFORG, pos.x, pos.y, pos.z, rot.x, rot.y, rot.z, params);
-
                     return;
                 }
+            }
+            break;
+
+        case 12:
+            switch (actor->id) {
+                case ACTOR_EN_WIZ:
+                    Actor_Kill(actor);
+                    break;
             }
             break;
 
