@@ -89,7 +89,7 @@ void Snowhead_Temple_AfterActorInit(PlayState* play, Actor* actor) {
 
         case 11:
             switch (actor->id) {
-                case ACTOR_EN_DINOFOS:
+                case ACTOR_EN_DINOFOS: {
                     Vec3f pos = actor->world.pos;
                     Vec3s rot = actor->world.rot;
                     s16 params = 0x3000;
@@ -98,6 +98,7 @@ void Snowhead_Temple_AfterActorInit(PlayState* play, Actor* actor) {
                     Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELFORG, pos.x, pos.y, pos.z, rot.x, rot.y, rot.z, params);
 
                     return;
+                }
             }
             break;
 

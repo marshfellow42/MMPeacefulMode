@@ -24,11 +24,13 @@ void Stone_Tower_AfterActorInit(PlayState* play, Actor* actor) {
     /*
         ACTOR_EN_VM = Beamos
         ACTOR_EN_FIREFLY = Keese (Normal, Ice or Fire)
+        ACTOR_EN_RD = Redead
     */
 
     switch (actor->id) {
         case ACTOR_EN_VM:
         case ACTOR_EN_FIREFLY:
+        case ACTOR_EN_RD:
             Actor_Kill(actor);
             break;
     }

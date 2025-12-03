@@ -33,11 +33,9 @@ void Deku_Palace_AfterActorInit(PlayState* play, Actor* actor) {
         case ACTOR_EN_DEKUNUTS: {
             Vec3f pos = actor->world.pos;
             Vec3s rot = actor->world.rot;
-
             s16 params = 0x0080;
 
             Actor_Kill(actor);
-
             Actor_Spawn(&play->actorCtx, play, ACTOR_OBJ_ETCETERA, pos.x, pos.y, pos.z, rot.x, rot.y, rot.z, params);
 
             return;

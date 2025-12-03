@@ -31,12 +31,21 @@ void Woodfall_Temple_AfterActorInit(PlayState* play, Actor* actor) {
         ACTOR_EN_ST = Skulltula
         ACTOR_EN_KAME = Snapper
         ACTOR_EN_DINOFOS = Dinolfos
-        ACTOR_EN_BIGPAMET = Gekko & Snapper Miniboss - Snapper
-        ACTOR_EN_PAMETFROG = Gekko & Snapper Miniboss - Gekko
         ACTOR_BOSS_01 = Odolwa
+        ACTOR_EN_TANRON1 = Moth
     */
 
     switch (play->roomCtx.curRoom.num) {
+        case 0:
+            switch (actor->id) {
+                case ACTOR_EN_GRASSHOPPER:
+                case ACTOR_EN_ST:
+                case ACTOR_EN_TANRON1:
+                    Actor_Kill(actor);
+                    break;
+            }
+            break;
+
         case 1:
             switch (actor->id) {
                 case ACTOR_EN_DEKUBABA:
@@ -56,19 +65,32 @@ void Woodfall_Temple_AfterActorInit(PlayState* play, Actor* actor) {
             break;
 
         case 3:
-            if (actorListIndex == 3) {
-                // Kill the Skulltula and replace its actor with the Stray Fairy
-                Vec3f pos = actor->world.pos;
-                Vec3s rot = actor->world.rot;
+            switch (actor->id) {
+                case ACTOR_EN_DEKUBABA:
+                case ACTOR_EN_KAREBABA:
+                case ACTOR_EN_TANRON1:
+                    Actor_Kill(actor);
+                    break;
+                case ACTOR_EN_ST: {
+                    Vec3f pos = actor->world.pos;
+                    Vec3s rot = actor->world.rot;
+                    s16 params = 0x5E02;
 
-                s16 params = 0x5E02;
+                    Actor_Kill(actor);
+                    Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELFORG, pos.x, pos.y, pos.z, rot.x, rot.y, rot.z, params);
 
-                Actor_Kill(actor);
-
-                Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELFORG, pos.x, pos.y, pos.z, rot.x, rot.y, rot.z, params);
-
-                return;
+                    return;
+                }
             }
+            break;
+
+        case 4:
+            switch (actor->id) {
+                case ACTOR_EN_GRASSHOPPER:
+                    Actor_Kill(actor);
+                    break;
+            }
+            break;
 
         case 6:
             switch (actor->id) {
@@ -86,15 +108,21 @@ void Woodfall_Temple_AfterActorInit(PlayState* play, Actor* actor) {
             }
             break;
 
-        case 8:
+        case 9:
             switch (actor->id) {
-                case ACTOR_EN_BIGPAMET:
-                case ACTOR_EN_PAMETFROG:
+                case ACTOR_EN_MKK:
                     Actor_Kill(actor);
                     break;
             }
             break;
 
+        case 10:
+            switch (actor->id) {
+                case ACTOR_EN_GRASSHOPPER:
+                    Actor_Kill(actor);
+                    break;
+            }
+            break;
     }
 
     /*

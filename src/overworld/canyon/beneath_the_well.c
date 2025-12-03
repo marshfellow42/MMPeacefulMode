@@ -40,13 +40,7 @@ void Beneath_The_Well_AfterActorInit(PlayState* play, Actor* actor) {
         case 1:
             switch (actor->id) {
                 case ACTOR_EN_FZ:
-                    Actor_Kill(actor);
-                    break;
-
                 case ACTOR_EN_FIREFLY:
-                    Actor_Kill(actor);
-                    break;
-
                 case ACTOR_EN_KAREBABA:
                     Actor_Kill(actor);
                     break;
@@ -55,9 +49,6 @@ void Beneath_The_Well_AfterActorInit(PlayState* play, Actor* actor) {
         case 3:
             switch (actor->id) {
                 case ACTOR_EN_FIREFLY:
-                    Actor_Kill(actor);
-                    break;
-
                 case ACTOR_EN_HONOTRAP:
                     Actor_Kill(actor);
                     break;
@@ -66,9 +57,6 @@ void Beneath_The_Well_AfterActorInit(PlayState* play, Actor* actor) {
         case 4:
             switch (actor->id) {
                 case ACTOR_EN_WDHAND:
-                    Actor_Kill(actor);
-                    break;
-
                 case ACTOR_EN_HONOTRAP:
                     Actor_Kill(actor);
                     break;
@@ -77,9 +65,6 @@ void Beneath_The_Well_AfterActorInit(PlayState* play, Actor* actor) {
         case 6:
             switch (actor->id) {
                 case ACTOR_EN_DEKUBABA:
-                    Actor_Kill(actor);
-                    break;
-
                 case ACTOR_EN_KAREBABA:
                     Actor_Kill(actor);
                     break;
@@ -115,11 +100,8 @@ void Beneath_The_Well_AfterActorInit(PlayState* play, Actor* actor) {
 
         default:
             switch (actor->id) {
-                case ACTOR_EN_TALK_GIBUD:
-                    Actor_Kill(actor);
-                    break;
-
                 case ACTOR_EN_WALLMAS:
+                case ACTOR_EN_TALK_GIBUD:
                     Actor_Kill(actor);
                     break;
             }

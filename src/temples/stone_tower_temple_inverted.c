@@ -8,7 +8,7 @@
 RECOMP_IMPORT("ProxyMM_ActorListIndex", s32 GetActorListIndex(Actor* actor));
 
 RECOMP_CALLBACK("*", recomp_after_actor_init)
-void Stone_Tower_Temple_AfterActorInit(PlayState* play, Actor* actor) {
+void Stone_Tower_Temple_Inverted_AfterActorInit(PlayState* play, Actor* actor) {
     s32 actorListIndex = GetActorListIndex(actor);
 
     if(gSaveContext.gameMode != GAMEMODE_NORMAL)
@@ -20,8 +20,10 @@ void Stone_Tower_Temple_AfterActorInit(PlayState* play, Actor* actor) {
         2 = Temples
     */
 
-    if (play->sceneId != SCENE_INISIE_N || recomp_get_config_u32("enemy_removal") == 1)
+    if (play->sceneId != SCENE_INISIE_R || recomp_get_config_u32("enemy_removal") == 1)
         return;
+
+    s32 id = actor->id;
 
     /*
         ACTOR_EN_VM = Beamos
@@ -43,14 +45,13 @@ void Stone_Tower_Temple_AfterActorInit(PlayState* play, Actor* actor) {
         ACTOR_EN_BAGUO = Nejiron
         ACTOR_EN_DEATH = Gomess
         ACTOR_EN_MINIDEATH = Bats Surrounding Gomess
-        ACTOR_EN_JSO2 = Garo Master
+        ACTOR_EN_TUBO_TRAP = Pot - Trap
     */
 
     switch (play->roomCtx.curRoom.num) {
         case 0:
             switch (actor->id) {
-                case ACTOR_EN_GRASSHOPPER:
-                case ACTOR_EN_RAT:
+                case ACTOR_EN_FAMOS:
                     Actor_Kill(actor);
                     break;
             }
@@ -58,9 +59,8 @@ void Stone_Tower_Temple_AfterActorInit(PlayState* play, Actor* actor) {
 
         case 1:
             switch (actor->id) {
-                case ACTOR_EN_EGOL:
-                case ACTOR_EN_VM:
                 case ACTOR_EN_WDHAND:
+                case ACTOR_EN_EGOL:
                     Actor_Kill(actor);
                     break;
             }
@@ -68,9 +68,8 @@ void Stone_Tower_Temple_AfterActorInit(PlayState* play, Actor* actor) {
 
         case 2:
             switch (actor->id) {
-                case ACTOR_EN_GRASSHOPPER:
-                case ACTOR_EN_RAT:
-                case ACTOR_EN_CROW:
+                case ACTOR_EN_POH:
+                case ACTOR_EN_FAMOS:
                     Actor_Kill(actor);
                     break;
             }
@@ -78,9 +77,8 @@ void Stone_Tower_Temple_AfterActorInit(PlayState* play, Actor* actor) {
 
         case 3:
             switch (actor->id) {
-                case ACTOR_BOSS_05:
-                case ACTOR_EN_PR2:
-                case ACTOR_EN_RAT:
+                case ACTOR_EN_BB:
+                case ACTOR_EN_PP:
                     Actor_Kill(actor);
                     break;
             }
@@ -88,16 +86,7 @@ void Stone_Tower_Temple_AfterActorInit(PlayState* play, Actor* actor) {
 
         case 4:
             switch (actor->id) {
-                case ACTOR_EN_AM:
-                    Actor_Kill(actor);
-                    break;
-            }
-            break;
-
-        case 7:
-            switch (actor->id) {
-                case ACTOR_EN_MKK:
-                case ACTOR_EN_BAGUO:
+                case ACTOR_EN_WIZ:
                     Actor_Kill(actor);
                     break;
             }
@@ -105,20 +94,21 @@ void Stone_Tower_Temple_AfterActorInit(PlayState* play, Actor* actor) {
 
         case 8:
             switch (actor->id) {
-                case ACTOR_EN_PP:
+                case ACTOR_EN_VM:
+                case ACTOR_EN_TUBO_TRAP:
                     Actor_Kill(actor);
                     break;
             }
             break;
 
-        case 10:
+        case 11:
             switch (actor->id) {
-                case ACTOR_EN_JSO2:
+                case ACTOR_EN_DEATH:
+                case ACTOR_EN_MINIDEATH:
                     Actor_Kill(actor);
                     break;
             }
             break;
-
     }
 
     /*
@@ -131,11 +121,11 @@ void Stone_Tower_Temple_AfterActorInit(PlayState* play, Actor* actor) {
 }
 
 RECOMP_HOOK("DoorShutter_SetupDoor")
-void Stone_Tower_Temple_DoorShutter_UnlockAllDoors(DoorShutter* this, PlayState* play) {
+void Stone_Tower_Temple_Inverted_DoorShutter_UnlockAllDoors(DoorShutter* this, PlayState* play) {
     if(gSaveContext.gameMode != GAMEMODE_NORMAL)
         return;
 
-    if (play->sceneId != SCENE_INISIE_N || recomp_get_config_u32("enemy_removal") == 1)
+    if (play->sceneId != SCENE_INISIE_R || recomp_get_config_u32("enemy_removal") == 1)
         return;
 
     Flags_SetClear(play, this->slidingDoor.dyna.actor.room);
@@ -143,11 +133,11 @@ void Stone_Tower_Temple_DoorShutter_UnlockAllDoors(DoorShutter* this, PlayState*
 }
 
 RECOMP_HOOK("EnBox_Init")
-void Stone_Tower_Temple_ForceChestRoomClear(EnBox* this, PlayState* play) {
+void Stone_Tower_Temple_Inverted_ForceChestRoomClear(EnBox* this, PlayState* play) {
     if (gSaveContext.gameMode != GAMEMODE_NORMAL)
         return;
 
-    if (play->sceneId != SCENE_INISIE_N || recomp_get_config_u32("enemy_removal") == 1)
+    if (play->sceneId != SCENE_INISIE_R || recomp_get_config_u32("enemy_removal") == 1)
         return;
 
     Flags_SetClear(play, this->dyna.actor.room);
